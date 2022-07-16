@@ -368,6 +368,9 @@ body {
   display: block;
   font-size: 30px;
 }
+.grid_layout .center_row main .main_text .text {
+  text-align: justify;
+}
 .grid_layout footer {
   -ms-grid-column: 1;
   grid-column: 1;

@@ -35,35 +35,28 @@ function init(){
         center: [60.21957835473155,96.94846497519858],
         zoom: 3
     });
-    // IVLmap = new ymaps.Map("map_object2", {
-    //     center: [60.21957835473155,96.94846497519858],
-    //     zoom: 3
-    // });
+    IVLmap = new ymaps.Map("map_object2", {
+        center: [60.21957835473155,96.94846497519858],
+        zoom: 3
+    });
     if(localStorage.getItem('calc_res') === undefined || localStorage.getItem('loaded_data') === undefined)
         return;
     let csv_data = JSON.parse(localStorage.getItem('loaded_data'));
+    let days_ivl = JSON.parse('[' + localStorage.getItem('days_ivl') + ']');
+    let pred = JSON.parse('[' + localStorage.getItem('calc_res') + ']');
     let maxF = 0;
-    for(let i of JSON.parse('[' + localStorage.getItem('calc_res') + ']')){
-        if(i > maxF) maxF = i;
+    let maxDays = 0;
+    for(let i = 0; i < pred.length; i++){
+        if(pred[i] > maxF) maxF = pred[i];
+        if(days_ivl[i] > maxDays) maxDays = days_ivl[i];
     }
     let count = 1;
     let subjects = [];
-    JSON.parse('[' + localStorage.getItem('calc_res') + ']').forEach((i, count) => {
+    pred.forEach((i, count) => {
         count++;
         if(csv_data[count][4] == 0 || subjects.includes(csv_data[count][3])) return;
         let [R,G,B] = [i / maxF * 255, (1 - i/maxF) * 255, 0];
-        // let myCircle = new ymaps.Circle([[csv_data[count][1], csv_data[count][2]], 50000], {
-        //     hintContent : csv_data[count][3],
-        //     balloonContentHeader: "Город " + csv_data[count][3],
-        //     balloonContentBody: "Население: " + Math.floor(csv_data[count][4]) + ' чел., частота заражений: ' + Number((i).toFixed(2))
-        // },{
-        //     fillColor: 'rgb('+ R +',' + G + ',' + B + ')',
-        //     fillOpacity: 0.5,
-        //     strokeWidth: '0'
-        // });
-        // console.log(i + "  " + csv_data[count][3] + "  " + myCircle);
-        // coronamap.geoObjects.add(myCircle);
-        var placemark = new ymaps.Placemark([csv_data[count][1], csv_data[count][2]], {
+        let placemark_pred = new ymaps.Placemark([csv_data[count][1], csv_data[count][2]], {
             hintContent : csv_data[count][3],
             balloonContentHeader: "Город " + csv_data[count][3],
             balloonContentBody: "Население: " + Math.floor(csv_data[count][4]) + ' чел., скорость распространения вируса: ' + Number((i).toFixed(2))
@@ -74,7 +67,21 @@ function init(){
             iconColor: 'rgb('+ R +',' + G + ',' + B + ')',
 
         });
-        coronamap.geoObjects.add(placemark);
+        if(days_ivl[count-1] === -1) days_ivl[count-1] = maxDays;
+        [R,G,B] = [(1 - days_ivl[count-1] / maxDays) * 255, 0, days_ivl[count-1] / maxDays * 255];
+        let placemark_days = new ymaps.Placemark([csv_data[count][1], csv_data[count][2]], {
+            hintContent : csv_data[count][3],
+            balloonContentHeader: "Город " + csv_data[count][3],
+            balloonContentBody: "Население: " + Math.floor(csv_data[count][4]) + ' чел., ИВЛ осталось на  ' + days_ivl[count-1] + ' дней'
+        }, {
+            // Задаем стиль метки (метка в виде круга).
+            preset: "islands#circleIcon",
+            // Задаем цвет метки (в формате RGB).
+            iconColor: 'rgb('+ R +',' + G + ',' + B + ')',
+
+        });
+        coronamap.geoObjects.add(placemark_pred);
+        IVLmap.geoObjects.add(placemark_days);
         subjects.push(csv_data[count][3]);
     });
 }

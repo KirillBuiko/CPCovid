@@ -144,13 +144,8 @@
   }
 
   .map1, .map2{
-    width: 100%;
     flex-grow: 1;
-    .map_object{
-      border:3px solid rgb(137, 0, 255);
-      width: 100%;
-      height: 500px;
-    }
+
   }
 
   .map2{
@@ -167,7 +162,11 @@
     font-size: 15px;
   }
   .map_object{
-  }
+     border:3px solid rgb(137, 0, 255);
+     width: 100%;
+     height: 500px;
+     background-color: white;
+   }
 
 
 

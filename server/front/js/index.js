@@ -25,9 +25,8 @@ let uploadFile = () => {
     })
         .then(response => response.json())
         .then(result => {
-            console.log(result);
-            return;
-            localStorage.setItem('calc_res', result);
+            localStorage.setItem('calc_res', result.pred);
+            localStorage.setItem('days_ivl', result.days);
             let reader = new FileReader();
             reader.readAsText(file);
             reader.onload = function() {
