@@ -96,10 +96,8 @@
       flex-grow: 0;
     }
 
-    .submit_button{
+    .submit_button, .skip_button{
       @extend %button_set;
-      margin-top: 15px;
-      margin-bottom: 40px;
       height: 40px;
       display: inline-flex;
       justify-content: center;
@@ -109,6 +107,10 @@
       &, &::after, &::before{
         border-radius: 10px;
       }
+    }
+    .submit_button{
+      margin-top: 15px;
+      margin-bottom: 40px;
     }
 
     .load_bar {

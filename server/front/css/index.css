@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
-.grid_layout header .logo, .text_body .cont .submit_button, .text_body .cont .file_button, .grid_layout header .menu_panel > *, .grid_layout header .burger_button {
+.grid_layout header .logo, .text_body .cont .submit_button, .text_body .cont .skip_button, .text_body .cont .file_button, .grid_layout header .menu_panel > *, .grid_layout header .burger_button {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
   user-select: none;
 }
 
-.text_body .cont .submit_button, .text_body .cont .file_button, .grid_layout header .menu_panel > *, .grid_layout header .burger_button {
+.text_body .cont .submit_button, .text_body .cont .skip_button, .text_body .cont .file_button, .grid_layout header .menu_panel > *, .grid_layout header .burger_button {
   height: inherit;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -97,32 +97,32 @@ h1, h2, h3, h4, h5, h6 {
   transition: color 0.1s ease;
   background-color: white;
 }
-.text_body .cont .submit_button::before, .text_body .cont .file_button::before, .grid_layout header .menu_panel > ::before, .grid_layout header .burger_button::before, .text_body .cont .submit_button::after, .text_body .cont .file_button::after, .grid_layout header .menu_panel > ::after, .grid_layout header .burger_button::after {
+.text_body .cont .submit_button::before, .text_body .cont .skip_button::before, .text_body .cont .file_button::before, .grid_layout header .menu_panel > ::before, .grid_layout header .burger_button::before, .text_body .cont .submit_button::after, .text_body .cont .skip_button::after, .text_body .cont .file_button::after, .grid_layout header .menu_panel > ::after, .grid_layout header .burger_button::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
 }
-.text_body .cont .submit_button::before, .text_body .cont .file_button::before, .grid_layout header .menu_panel > ::before, .grid_layout header .burger_button::before {
+.text_body .cont .submit_button::before, .text_body .cont .skip_button::before, .text_body .cont .file_button::before, .grid_layout header .menu_panel > ::before, .grid_layout header .burger_button::before {
   height: 100%;
   background-color: white;
   z-index: -2;
 }
-.text_body .cont .submit_button::after, .text_body .cont .file_button::after, .grid_layout header .menu_panel > ::after, .grid_layout header .burger_button::after {
+.text_body .cont .submit_button::after, .text_body .cont .skip_button::after, .text_body .cont .file_button::after, .grid_layout header .menu_panel > ::after, .grid_layout header .burger_button::after {
   height: 0;
   background-color: rgb(137, 0, 255);
   z-index: -1;
   -webkit-transition: height 0.1s ease;
   transition: height 0.1s ease;
 }
-.text_body .cont .submit_button:hover, .text_body .cont .file_button:hover, .grid_layout header .menu_panel > :hover, .grid_layout header .burger_button:hover {
+.text_body .cont .submit_button:hover, .text_body .cont .skip_button:hover, .text_body .cont .file_button:hover, .grid_layout header .menu_panel > :hover, .grid_layout header .burger_button:hover {
   color: white;
 }
-.text_body .cont .submit_button:hover::after, .text_body .cont .file_button:hover::after, .grid_layout header .menu_panel > :hover::after, .grid_layout header .burger_button:hover::after {
+.text_body .cont .submit_button:hover::after, .text_body .cont .skip_button:hover::after, .text_body .cont .file_button:hover::after, .grid_layout header .menu_panel > :hover::after, .grid_layout header .burger_button:hover::after {
   height: 100%;
 }
-.text_body .cont .submit_button:active::after, .text_body .cont .file_button:active::after, .grid_layout header .menu_panel > :active::after, .grid_layout header .burger_button:active::after {
+.text_body .cont .submit_button:active::after, .text_body .cont .skip_button:active::after, .text_body .cont .file_button:active::after, .grid_layout header .menu_panel > :active::after, .grid_layout header .burger_button:active::after {
   background-color: rgb(72, 0, 138);
 }
 
@@ -543,9 +543,7 @@ body {
       -ms-flex-positive: 0;
           flex-grow: 0;
 }
-.text_body .cont .submit_button {
-  margin-top: 15px;
-  margin-bottom: 40px;
+.text_body .cont .submit_button, .text_body .cont .skip_button {
   height: 40px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -559,8 +557,12 @@ body {
   font-size: 18px;
   max-width: 450px;
 }
-.text_body .cont .submit_button, .text_body .cont .submit_button::after, .text_body .cont .submit_button::before {
+.text_body .cont .submit_button, .text_body .cont .submit_button::after, .text_body .cont .submit_button::before, .text_body .cont .skip_button, .text_body .cont .skip_button::after, .text_body .cont .skip_button::before {
   border-radius: 10px;
+}
+.text_body .cont .submit_button {
+  margin-top: 15px;
+  margin-bottom: 40px;
 }
 .text_body .cont .load_bar {
   display: none;

@@ -25,15 +25,15 @@ let uploadFile = () => {
     })
         .then(response => response.json())
         .then(result => {
+            console.log(result);
+            return;
             localStorage.setItem('calc_res', result);
             let reader = new FileReader();
             reader.readAsText(file);
             reader.onload = function() {
                 let csv_obj = $.csv.toArrays(reader.result);
-                alert(csv_obj[0].length);
                 if(csv_obj[0].length === 1){
                     csv_obj = $.csv.toArrays(reader.result, {separator: ';'});
-                    alert(csv_obj[0].length);
                 }
                 if(csv_obj[0].length === 1){
                     uploadError();

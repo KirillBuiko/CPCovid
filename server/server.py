@@ -1,6 +1,7 @@
 import pickle
 import pandas as pd
 import uvicorn
+import math
 from fastapi import FastAPI
 from fastapi import UploadFile
 from fastapi import File
@@ -50,15 +51,42 @@ def read_csv(data: StringIO, encoding) -> pd.DataFrame:
         raise Exception('Can not read file')
 
 
-def predict(model, file: StringIO, encoding='utf-8'):
-    train = read_csv(file, encoding)
-    train = train.fillna(0)
-    columns_to_drop = ['name', 'district', 'region_x',
-                       'subject', 'Unnamed: 0', 'inf_rate']
+def get_vent_days(vent_count, inf_rate):
+    days = 0
+    inf = inf_rate
+    while vent_count > 0:
+        vent_count -= inf * 0.03
+        inf = inf * 100
+        days += 1
+    return days*15
+
+
+def predict(model, filename, encoding='utf-8'):
+    data = read_csv(filename, encoding)
+    data = data.fillna(0)
+    columns_to_drop = ['name', 'district', 'region_x', 'subject', 'Unnamed: 0', 'inf_rate']
     for column in columns_to_drop:
-        train.drop(column, inplace=True, axis=1)
-    result = model.predict(train)
-    return list(result)
+        data.drop(column, inplace=True, axis=1)
+    prediction = model.predict(data)
+    ivls = data.ivl_number.values.tolist()
+    days_to_end = []
+    for i in range(len(ivls)):
+        if math.exp(prediction[i])-1 > 0:
+            # days_to_end.append(round(ivls[i]/(math.exp(prediction[i])-1)))
+            days_to_end.append(get_vent_days(ivls[i], math.exp(prediction[i])-1))
+        else:
+            days_to_end.append(-1)
+    return {"pred": list(prediction), "days": list(days_to_end)}
+
+# def predict(model, file: StringIO, encoding='utf-8'):
+#     train = read_csv(file, encoding)
+#     train = train.fillna(0)
+#     columns_to_drop = ['name', 'district', 'region_x',
+#                        'subject', 'Unnamed: 0', 'inf_rate']
+#     for column in columns_to_drop:
+#         train.drop(column, inplace=True, axis=1)
+#     result = model.predict(train)
+#     return list(result)
 
 
 def generate(url, type):
@@ -69,15 +97,15 @@ def generate(url, type):
 
 @app.get('/css/{css_file}', response_class=Response)
 async def send_css(css_file):
-    return generate('site/css/' + css_file, 'text/css')
+    return generate('front/css/' + css_file, 'text/css')
 
 @app.get('/js/{js_file}', response_class=Response)
 async def send_js(js_file):
-    return generate('site/js/' + js_file, 'application/javascript')
+    return generate('front/js/' + js_file, 'application/javascript')
 
 @app.get('/js/leaflet/{js_file}', response_class=Response)
 async def send_js(js_file):
-    return generate('site/js/leaflet/' + js_file, 'application/javascript')
+    return generate('front/js/leaflet/' + js_file, 'application/javascript')
 
 @app.post('/upload')
 async def upload_data_csv(file: UploadFile = File(...)):
@@ -86,11 +114,11 @@ async def upload_data_csv(file: UploadFile = File(...)):
 
 @app.get('/', response_class=Response)
 async def send_page():
-    return generate('site/index.html', 'text/html')
+    return generate('front/index.html', 'text/html')
 
 @app.get('/result', response_class=Response)
 async def send_page():
-    return generate('site/result.html', 'text/html')
+    return generate('front/result.html', 'text/html')
 
 if __name__ == '__main__':
     uvicorn.run(app, port=8099)
