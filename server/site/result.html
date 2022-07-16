@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница результата</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <link href="css/result.css" rel="stylesheet">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=89793da3-b976-4c72-960f-74143ac8aad9&lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+<div class="grid_layout">
+    <header>
+    </header>
+    <div class="center_row">
+        <aside class="space"></aside><main>
+    <span class="main_text">
+        <span class="text_header">Результаты</span>
+        <span class="text_body">
+            <span class="text" >
+            На этой странице вы сможете найти результат в трёх видах: файл csv для проверки, карта с предсказанной скоростью
+                распространения коронавируса, а также карта с информацией о днях, когда кончатся аппараты ИВЛ.
+            </span>
+            <span class="submit_button cont">
+                <span class="submit_button button" onclick="downloadCSV()">Скачать файл csv для проверки</span>
+                <div class="load_bar"></div>
+            </span>
+            <span class="map1">
+                <span class="text_header map_header">Карта скорости заражения</span>
+                <span class="map_text text">Эта карта показывает, с какой скоростью предположительно будет происходит
+                    заражение в населёном пункте. Градация происходит от наименьшей скорости заражения (синий), до красного
+                    (высокий).</span>
+                <div id="map_object1" class="map_object"></div>
+            </span>
+            <span class="map2">
+                <span class="text_header map_header">Карта ИВЛ</span>
+                <span class="map_text text">Данная карта показывает, на сколько хватит апаратов ИВЛ в населйнном пункте,
+                от 0 (красный) до 30+ (синий)</span>
+                <div id="map_object2" class="map_object"></div>
+            </span>
+        </span>
+    </span>
+</main>
+<script src="js/result.js"></script>
+        <aside class="space"></aside>
+    </div>
+    <footer>
+        <span class="developers_panel">
+            Разработано командой PickAim
+        </span>
+        <span class="contact_panel">
+            Почта: k.buiko04@mail.ru
+        </span>
+    </footer>
+</div></body>
+</html>

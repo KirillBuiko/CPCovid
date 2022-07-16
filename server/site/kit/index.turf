@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <link href="css/index.css" rel="stylesheet">
+</head>
+<body>
+<!--@import "header.turf"-->
+<main>
+    <span class="main_text">
+        <span class="text_header">Здравствуйте!</span>
+        <span class="text_body">
+            <span class="text">
+            На этой странице можно загрузить csv файл* с вашими данными для получения свдений о вероятной частоте заболеваемости в различных регионах. Ниже есть форма для выбора и загрузки файла, после обработки вы сможете перейти на страницу с результатами.
+            </span>
+            <span class="login cont">
+                <input class="file_text" type="text" readonly>
+                <input type="file" id="file_input">
+                <label for="file_input" class="file_button button">Выбрать файл .csv</label>
+            </span>
+            <span class="submit_button cont">
+                <span class="submit_button button">Загрузка</span>
+                <div class="load_bar"></div>
+            </span>
+        </span>
+        <span class="help_text">
+            *csv файл должен быть такого же формата, что и файлы, данные для обучения.
+        </span>
+    </span>
+</main>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.csv.js"></script>
+<script src="js/index.js"></script>
+<!--@import "footer.turf"-->
+</body>
+</html>

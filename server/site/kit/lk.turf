@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/reg.css" rel="stylesheet">
+</head>
+<body>
+<!--@import "header.turf"-->
+<main>
+    <span class="main_text">
+        <span class="text_header">Личный кабинет</span>
+        <span class="text_body">
+            <span class="name cont">
+                <span class="name label">Имя:</span>
+                <input type="text" class="name input" readonly>
+            </span>
+
+            <span class="surname cont">
+                <span class="surname label">Фамилия:</span>
+                <input type="text" class="surname input" readonly>
+            </span>
+
+            <span class="lastname cont">
+                <span class="lastname label">Отчество:</span>
+                <input type="text" class="lastname input" readonly>
+            </span>
+
+            <span class="email cont">
+                <span class="email label">Почта:</span>
+                <input type="email" class="email input" readonly>
+            </span>
+        </span>
+    </span>
+</main>
+<script src="js/lk.js"></script>
+<!--@import "footer.turf"-->
+</body>
+</html>

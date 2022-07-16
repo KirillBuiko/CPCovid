@@ -1,0 +1,151 @@
+@import "main.scss";
+
+.load_form{
+  width: 100%;
+  height: 500px;
+  display: flex;
+  margin-top: 30px;
+  flex-grow: 0;
+  flex-direction: column;
+  background-color: rgb(255, 190, 248);
+  border-radius: 15px;
+}
+
+.help_text{
+  margin-top: 30px;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.text_body{
+  display: flex;
+  margin-top: 15px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  #file_input{
+    display: none;
+  }
+
+  .text{
+    font-size: 17px;
+    margin-bottom: 20px;
+  }
+
+  .error_text{
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.6em;
+    height: 0;
+    padding: 0 15px 0 15px;
+    max-width: 100%;
+    width: 70px;
+    opacity: 0;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-align: center;
+    background-color: rgb(80, 30, 30);
+    border-radius: 15px;
+    $error-show-dur: 0.3s;
+    transition: height $error-show-dur, padding $error-show-dur, opacity $error-show-dur;
+  }
+  .cont{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 0;
+    width:100%;
+    .file_text{
+      background-color: #DDD;
+      display: inline-flex;
+      justify-content: center;
+      border-bottom: 2px solid rgb(137, 0, 255);
+      flex-grow: 1;
+      max-width: 300px;
+      height: 30px;
+      font-style: italic;
+      margin-right: 10px;
+      padding-left: 5px;
+    }
+
+    .file_button{
+      @extend %button_set;
+      display: inline-flex;
+      justify-content: center;
+      flex-grow: 1;
+      max-width: 250px;
+      height: 35px;
+      font-size: 17px;
+      border-radius: 8px;
+      padding-inline: 10px;
+      padding-block: 3px;
+      &, &::after, &::before{
+        border-radius: 10px;
+      }
+    }
+
+    .label{
+      font-size: 20px;
+      width: 100px;
+      height: 50px;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 20px;
+      justify-content: flex-end;
+      flex-grow: 0;
+    }
+
+    .submit_button{
+      @extend %button_set;
+      margin-top: 15px;
+      margin-bottom: 40px;
+      height: 40px;
+      display: inline-flex;
+      justify-content: center;
+      flex-grow: 1;
+      font-size: 18px;
+      max-width: 450px;
+      &, &::after, &::before{
+        border-radius: 10px;
+      }
+    }
+
+    .load_bar {
+      display:    none;
+      z-index:    1000;
+      margin-top: 15px;
+      margin-bottom: 40px;
+      height: 40px;
+      width: 40px;
+      background: #DDD
+      url('http://i.stack.imgur.com/FhHRx.gif')
+      50% 50%
+      no-repeat;
+    }
+
+    .button{
+      &.loading{
+        &, &::after, &::before{
+          background-color: #ccc7d0;
+        }
+        &:hover{
+          color: black;
+        }
+      }
+    }
+  }
+  &.loading{
+    .load_bar{
+      display: block;
+    }
+    .button{
+      &, &::after, &::before{
+        background-color: #ccc7d0;
+      }
+      &:hover{
+        color: black;
+      }
+    }
+  }
+}
