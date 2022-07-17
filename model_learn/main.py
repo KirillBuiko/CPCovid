@@ -35,5 +35,5 @@ if __name__ == '__main__':
     print("all")
     print(mean_absolute_error(y.values.tolist(), rf.predict(X)))
 
-    filename = 'inf_rate_model_has_metro.pickaim'
+    filename = 'inf_rate_model_has_metro_pickaim.pickaim'
     pickle.dump(rf, open(filename, 'wb'))
